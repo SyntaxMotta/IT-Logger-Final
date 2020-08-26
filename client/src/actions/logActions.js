@@ -32,25 +32,6 @@ export const getLogs = () => async (dispatch) => {
   }
 };
 
-// export const getLogs = () => async (dispatch) => {
-//   try {
-//     setLoading();
-
-//     const res = await fetch('/logs');
-//     const data = await res.json();
-
-//     dispatch({
-//       type: GET_LOGS,
-//       payload: data,
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: LOGS_ERROR,
-//       payload: err.response.statusText,
-//     });
-//   }
-// };
-
 // Add new log
 export const addLog = (log) => async (dispatch) => {
   const config = {
@@ -96,26 +77,6 @@ export const deleteLog = (id) => async (dispatch) => {
   }
 };
 
-// export const deleteLog = (id) => async (dispatch) => {
-//   try {
-//     setLoading();
-
-//     await fetch(`/logs/${id}`, {
-//       method: 'DELETE',
-//     });
-
-//     dispatch({
-//       type: DELETE_LOG,
-//       payload: id,
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: LOGS_ERROR,
-//       payload: err.response.statusText,
-//     });
-//   }
-// };
-
 // Update log on server
 export const updateLog = (log) => async (dispatch) => {
   const config = {
@@ -126,11 +87,11 @@ export const updateLog = (log) => async (dispatch) => {
   try {
     setLoading();
 
-    const res = await axios.post(`/api/logs/${log.id}`, log, config);
+    const res = await axios.put(`/api/logs/${log.id}`, log, config);
 
     dispatch({
       type: UPDATE_LOG,
-      payload: res.data.data,
+      payload: res.data,
     });
   } catch (err) {
     dispatch({

@@ -78,6 +78,9 @@ exports.deleteLog = async (req, res, next) => {
   }
 };
 
+// @route   PUT api/logs/:id
+// @desc    UPDATE log
+// @access    Public
 exports.updateLog = async (req, res, next) => {
   const { tech, message, attention } = req.body;
 
@@ -89,7 +92,7 @@ exports.updateLog = async (req, res, next) => {
   const options = { new: true };
 
   try {
-    let log = await Log.findById(req.params._id);
+    let log = await Log.findById(req.params.id);
 
     if (!log) {
       return res.status(404).json({
@@ -98,7 +101,7 @@ exports.updateLog = async (req, res, next) => {
       });
     }
 
-    log = await Log.findByIdAndUpdate(req.params._id, logFields, options);
+    log = await Log.findByIdAndUpdate(req.params.id, logFields, options);
 
     return res.status(201).json({
       success: true,
