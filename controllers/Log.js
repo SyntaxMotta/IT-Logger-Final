@@ -86,8 +86,10 @@ exports.updateLog = async (req, res, next) => {
   if (message) logFields.message = message;
   if (attention) logFields.attention = attention;
 
+  const options = { new: true };
+
   try {
-    let log = await Log.findById(req.params.id);
+    let log = await Log.findById(req.params._id);
 
     if (!log) {
       return res.status(404).json({
@@ -96,13 +98,7 @@ exports.updateLog = async (req, res, next) => {
       });
     }
 
-    log = await Log.findByIdAndUpdate(
-      req.params._id,
-      {
-        $set: logFields,
-      },
-      { new: true }
-    );
+    log = await Log.findByIdAndUpdate(req.params._id, logFields, options);
 
     return res.status(201).json({
       success: true,

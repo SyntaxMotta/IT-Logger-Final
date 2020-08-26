@@ -43,8 +43,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logs: state.logs.map((log) =>
-          log.id === action.payload._id ? action.payload : log
+          log._id === action.payload.id ? action.payload : log
         ),
+        loading: false,
       };
     case FILTER_LOGS:
       return {

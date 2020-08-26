@@ -118,10 +118,19 @@ export const deleteLog = (id) => async (dispatch) => {
 
 // Update log on server
 export const updateLog = (log) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
   try {
+    setLoading();
+
+    const res = await axios.post(`/api/logs/${log.id}`, log, config);
+
     dispatch({
       type: UPDATE_LOG,
-      payload: log,
+      payload: res.data.data,
     });
   } catch (err) {
     dispatch({
