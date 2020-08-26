@@ -12,9 +12,9 @@ const Logs = ({ log: { logs, loading }, getLogs, filtered }) => {
     // eslint-disable-next-line
   }, []);
 
-  if (loading || logs === null) {
-    return <PreLoader />;
-  }
+  // if (loading || logs === null) {
+  //   return <PreLoader />;
+  // }
 
   if (!loading && logs.length === 0) {
     return <p className="center">No logs to show...</p>;

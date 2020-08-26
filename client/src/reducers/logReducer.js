@@ -50,8 +50,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         filtered: state.logs.filter((log) => {
-          const regex = RegExp(`${action.payload}`, 'gi');
-          return log.message.match(regex) || log.tech.match(regex);
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return log.message.match(regex) || log.tech.match(regex); //|| log.tech.match(regex)
         }),
       };
     case CLEAR_FILTER:

@@ -10,32 +10,28 @@ const SearchBar = ({ filterLogs, clearFilter, filtered }) => {
     if (filtered === null) {
       text.current.value = '';
     }
-    console.log(filtered);
-  }, [filtered]);
+  });
 
   const onChange = (e) => {
     if (text.current.value !== '') {
       filterLogs(e.target.value);
+      console.log(filtered);
     } else {
       clearFilter();
     }
   };
 
   return (
-    <nav style={{ marginBottom: '30px' }} className="black">
+    <nav style={{ marginBottom: '30px' }} className="blue">
       <div className="nav-wrapper">
         <form>
           <div className="input-field">
             <input
-              id="filter"
               type="text"
               placeholder="Filter Logs..."
               ref={text}
               onChange={onChange}
             />
-            <label className="label-icon" htmlFor="filter">
-              <i className="material-icons">search</i>
-            </label>
           </div>
         </form>
       </div>
