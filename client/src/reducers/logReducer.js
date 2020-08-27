@@ -16,7 +16,7 @@ const initialState = {
   current: null,
   loading: false,
   error: null,
-  filtered: null,
+  filtered: {},
 };
 
 export default (state = initialState, action) => {
@@ -52,8 +52,10 @@ export default (state = initialState, action) => {
         ...state,
         filtered: state.logs.filter((log) => {
           const regex = new RegExp(`${action.payload}`, 'gi');
-          return log.message.match(regex) || log.tech.match(regex); //|| log.tech.match(regex)
+          return log.message.match(regex);
+          //|| log.tech.match(regex)
         }),
+        loading: false,
       };
     case CLEAR_FILTER:
       return {

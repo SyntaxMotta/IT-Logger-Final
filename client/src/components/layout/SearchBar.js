@@ -7,7 +7,7 @@ const SearchBar = ({ filterLogs, clearFilter, filtered }) => {
   const text = useRef('');
 
   useEffect(() => {
-    if (filtered === null) {
+    if (filtered === {}) {
       text.current.value = '';
     }
   });

@@ -27,7 +27,7 @@ export const getLogs = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText, // You might have to change this to err.response.data.error
+      payload: err.response.data.error, // You might have to change this to err.response.data.error
     });
   }
 };
@@ -104,6 +104,7 @@ export const updateLog = (log) => async (dispatch) => {
 // Search Logs
 export const filterLogs = (text) => async (dispatch) => {
   try {
+    setLoading();
     dispatch({
       type: FILTER_LOGS,
       payload: text,
