@@ -16,7 +16,7 @@ const initialState = {
   current: null,
   loading: false,
   error: null,
-  filtered: {},
+  filtered: null,
 };
 
 export default (state = initialState, action) => {
@@ -51,12 +51,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         filtered: state.logs.filter((log) => {
-          const regex = new RegExp(`${action.payload}`, 'gi');
-          return log.message.match(regex);
-          //|| log.tech.match(regex)
+          return log.message
+            .toLowerCase()
+            .includes(action.payload.toLowerCase());
         }),
         loading: false,
       };
+    // filtered: state.logs.filter((log) => {
+    //   const regex = new RegExp(`${action.payload}`, 'gi');
+    //   return log.message.match(regex);
+    //   || log.tech.match(regex)
+    // })
+
     case CLEAR_FILTER:
       return {
         ...state,

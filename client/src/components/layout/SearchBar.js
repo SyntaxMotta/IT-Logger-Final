@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { filterLogs, clearFilter } from '../../actions/logActions';
 
-const SearchBar = ({ filterLogs, clearFilter, filtered }) => {
+const SearchBar = ({ filterLogs, clearFilter, log: { filtered } }) => {
   const text = useRef('');
 
   useEffect(() => {
-    if (filtered === {}) {
+    if (filtered === null) {
       text.current.value = '';
     }
   });
@@ -15,7 +15,6 @@ const SearchBar = ({ filterLogs, clearFilter, filtered }) => {
   const onChange = (e) => {
     if (text.current.value !== '') {
       filterLogs(e.target.value);
-      console.log(filtered);
     } else {
       clearFilter();
     }
@@ -46,6 +45,7 @@ SearchBar.propTypes = {
 
 const mapStateToProps = (state) => ({
   filtered: state.filtered,
+  log: state.log,
 });
 
 export default connect(mapStateToProps, { filterLogs, clearFilter })(SearchBar);
