@@ -1,6 +1,9 @@
 {
 	"name": "it-logger-final",
 	"version": "1.0.0",
+	"engines": {
+		"node": "16.15.1"
+	},
 	"description": "Backend for IT-Logger",
 	"main": "server.js",
 	"scripts": {
