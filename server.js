@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/logs", logs);
 app.use("/api/techs", techs);
 
-__dirName = path.resolve();
+__dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/client/build")));
 
