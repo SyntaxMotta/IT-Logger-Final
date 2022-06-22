@@ -4,7 +4,6 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const host = "0.0.0.0";
-const PORT = process.env.PORT || 5000;
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -25,12 +24,11 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/logs", logs);
 app.use("/api/techs", techs);
 
-__dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/client/build")));
+	app.use(express.static(path.join(__dirname, "./client/build")));
 
 	app.get("*", (_, res) => {
-		res.sendFile(path.join(__dirname, "/client/build/index.html"));
+		res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 	});
 } else {
 	app.get("/", (req, res) => {
@@ -38,6 +36,8 @@ if (process.env.NODE_ENV === "production") {
 	});
 }
 
-app.listen(PORT, host, function () {
-	console.log("Server started.......");
-});
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, host, () =>
+	console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
